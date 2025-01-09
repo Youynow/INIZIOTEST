@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyhledávač Google</title>
+</head>
+<body>
+    <h1>Zadejte klíčové slovní spojení pro vyhledání</h1>
+    <form id="searchForm">
+        <input type="text" id="query" placeholder="Zadejte klíčové slovo" required>
+        <button type="submit">Hledat</button>
+    </form>
+
+    <h2>Výsledky vyhledávání</h2>
+    <ul id="results"></ul>
+
+    <button id="downloadButton" style="display:none;">Stáhnout výsledky</button>
+
+    <script>
+        const form = document.getElementById('searchForm');
+        const queryInput = document.getElementById('query');
+        const resultsContainer = document.getElementById('results');
+        const downloadButton = document.getElementById('downloadButton');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const query = queryInput.value;
+            const results = await fetchGoogleResults(query);
+            displayResults(results);
+        });
+
+        async function fetchGoogleResults(query) {
+            const response = await fetch(`https://api.example.com/search?q=${query}`);
+            const data = await response.json();
+            return data.results;
+        }
+
+        function displayResults(results) {
+            resultsContainer.innerHTML = '';
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result.title;
+                resultsContainer.appendChild(li);
+            });
+
+            downloadButton.style.display = 'inline-block';
+            downloadButton.addEventListener('click', () => downloadResults(results));
+        }
+
+        function downloadResults(results) {
+            const json = JSON.stringify(results, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'google_results.json';
+            link.click();
+        }
+    </script>
+</body>
+</html>
