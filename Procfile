@@ -1,1 +1,1 @@
-web: gunicorn <nazev_skriptu>:app
+web: gunicorn <soup>:app
