@@ -1,1 +1,1 @@
-web: gunicorn <soup>:app
+web: gunicorn soup:app
