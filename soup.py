@@ -1,5 +1,5 @@
 # Imports
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, render_template, jsonify, send_from_directory
 import requests # http requests
 from bs4 import BeautifulSoup # parsing html
 import csv # write to csv
