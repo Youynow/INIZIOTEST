@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -7,25 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    html = """
-    <!DOCTYPE html>
-    <html lang="cs">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Google Search Scraper</title>
-    </head>
-    <body>
-        <h1>Google Vyhledávání</h1>
-        <form action="/search" method="post">
-            <label for="query">Klíčové slovo:</label>
-            <input type="text" id="query" name="query" required>
-            <button type="submit">Hledat</button>
-        </form>
-    </body>
-    </html>
-    """
-    return render_template_string(html)
+    # Slouží k vrácení index.html
+    return send_from_directory('.', 'index.html')
 
 @app.route('/search', methods=['POST'])
 def search():
