@@ -50,5 +50,5 @@ def download_file():
     return send_from_directory('.', 'results.csv', as_attachment=True)
 
 # debugging
-#if __name__ == '__main__':
-#    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
