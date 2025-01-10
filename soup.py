@@ -43,7 +43,7 @@ def search():
     #return jsonify(results) # display data on web
 
 # Render the results on the page with the download link
-    return render_template('search_results.html', query=query, results=results, file_path=file_path)
+    return render_template('search_results.html', query=query, results=results)
 
 @app.route('/download')
 def download_file():
