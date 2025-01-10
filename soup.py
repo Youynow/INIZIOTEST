@@ -40,7 +40,10 @@ def search():
         writer.writeheader() 
         writer.writerows(results)
 
-    return jsonify(results) # display data on web
+    #return jsonify(results) # display data on web
+
+# Render the results on the page with the download link
+    return render_template('search_results.html', query=query, results=results, file_path=file_path)
 
 @app.route('/download')
 def download_file():
